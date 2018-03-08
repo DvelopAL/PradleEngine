@@ -26,6 +26,48 @@ namespace PradleEngine
 		}
 	}
 
+	Engine * Engine::Create()
+	{
+		Engine* engine = new (std::nothrow) Engine();
+		if (engine)
+		{
+			return engine;
+		}
+		return nullptr;
+	}
+
+	Engine * Engine::Create(int syncFrame)
+	{
+		Engine* engine = new (std::nothrow) Engine();
+		engine->SetSync(syncFrame);
+		if (engine)
+		{
+			return engine;
+		}
+		return nullptr;
+	}
+
+	Engine * Engine::Create(CODE_PAGE codePage)
+	{
+		Engine* engine = new (std::nothrow) Engine();
+		engine->SetCodePage(codePage);
+		if (engine)
+		{
+			return engine;
+		}
+		return nullptr;
+	}
+
+	Engine * Engine::Create(CODE_PAGE codePage, int syncFrame)
+	{
+		Engine* engine = new (std::nothrow) Engine(codePage, syncFrame);
+		if (engine)
+		{
+			return engine;
+		}
+		return nullptr;
+	}
+
 	void Engine::SetCodePage(CODE_PAGE codePage)
 	{
 		if (codePage == CODE_PAGE::KOREAN) system("chcp 949");
@@ -67,8 +109,8 @@ namespace PradleEngine
 		if (_outputHandle == INVALID_HANDLE_VALUE)
 			return false;
 
-		COORD ScreenSize = { CONSOLE_WIDHT, CONSOLE_HEIGHT };
-		SetConsoleScreenBufferSize(_outputHandle, ScreenSize);
+		COORD screenSize = { CONSOLE_WIDHT, CONSOLE_HEIGHT };
+		SetConsoleScreenBufferSize(_outputHandle, screenSize);
 		GetConsoleScreenBufferInfo(_outputHandle, &_consoleBufferInfo);
 
 		CONSOLE_CURSOR_INFO cursorInfo;

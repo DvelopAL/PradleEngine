@@ -11,12 +11,17 @@ namespace PradleEngine
 		~Renderer() = default;
 
 		static void DrawChar(int x, int y, char character, WORD wordColor, WORD bgColor);
+		static void SwapBuffer();
+		static void ClearBuffer(WORD bgColor);
+		static void WaitForSync();
+
+		static bool Init();
+		static bool Render();
+
 		static bool IsInConsole(int x, int y);
 		static bool IsInConsole(COORD coordinate);
 
 	private:
-		friend Engine;
-
 		static void SetBackBuffer(ConsoleBuffer* backBuffer) { _backBuffer = backBuffer; }
 
 	private:

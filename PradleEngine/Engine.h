@@ -20,22 +20,17 @@ namespace PradleEngine
 		void SetSync(int syncFrame);
 		void Excute(Scene* startScene);
 
+		bool Init();
+
 	protected:
 		Engine();
-		Engine(CODE_PAGE codePage, int syncFrame);
-		~Engine();
+		~Engine() = default;
 
 	private:
-		//bool InitConsole();
-		//void SwapChain();
-		BOOL RenderBuffer();
-		void ClearBackBuffer(WORD bgColor);
 		void WaitForSync();
 
 	private:
-		//int _syncFrame;
-		//std::vector<ConsoleBuffer*> _buffers;
-		HANDLE _outputHandle;
-		//CONSOLE_SCREEN_BUFFER_INFO _consoleBufferInfo;
+		int _syncFrame;
+
 	};
 }

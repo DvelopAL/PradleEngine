@@ -28,13 +28,13 @@ namespace PradleEngine
 		if (_keyValue[static_cast<int>(key)] == 0 && _keyValue[static_cast<int>(key)] == 0)
 		{
 			_keyValue[static_cast<int>(key)] = 1;
-			return true;				
+			return true;
 		}
 
 		return false;
 	}
 
-	bool Input::InitInput()
+	bool Input::Init()
 	{
 		ZeroMemory(_keyValue, sizeof(_keyValue));
 		memset(_keyUpValue, 1, sizeof(_keyUpValue));
@@ -49,7 +49,8 @@ namespace PradleEngine
 		DWORD modeOld, modeNew;
 		GetConsoleMode(_inputHandle, &modeOld);
 		modeNew = modeOld;
-		modeNew = modeNew | ENABLE_MOUSE_INPUT;
+		modeNew |= ENABLE_MOUSE_INPUT;
+		modeNew &= ~ENABLE_QUICK_EDIT_MODE;
 
 		if (SetConsoleMode(_inputHandle, modeNew) != TRUE)
 			return false;
@@ -59,17 +60,17 @@ namespace PradleEngine
 
 	void Input::Update()
 	{
-		DWORD dwUnread = 0, dwRead = 0;
-		GetNumberOfConsoleInputEvents(_inputHandle, &dwUnread);
-		
-		if (dwUnread == 0) 
+		DWORD unread = 0, read = 0;
+		GetNumberOfConsoleInputEvents(_inputHandle, &unread);
+
+		if (unread == 0)
 			return;
 
 		ZeroMemory(&_inputRecord, sizeof(INPUT_RECORD));
 
-		for (DWORD i = 0; i < dwUnread; ++i)
+		for (DWORD i = 0; i < unread; ++i)
 		{
-			ReadConsoleInput(_inputHandle, &_inputRecord, 1, &dwRead);
+			ReadConsoleInput(_inputHandle, &_inputRecord, 1, &unread);
 
 			switch (_inputRecord.EventType)
 			{
@@ -78,12 +79,11 @@ namespace PradleEngine
 				WORD keycode = _inputRecord.Event.KeyEvent.wVirtualKeyCode;
 				BOOL bkeydown = _inputRecord.Event.KeyEvent.bKeyDown;
 
-				_keyValue[keycode] = bkeydown;	
+				_keyValue[keycode] = bkeydown;
 
-				if (bkeydown == 1)			
+				if (bkeydown == 1)
 					_keyUpValue[keycode] = 0;
 			}
-
 			break;
 
 			case MOUSE_EVENT:
@@ -104,7 +104,7 @@ namespace PradleEngine
 			}
 		}
 
-		for (int i = 0xa0; i<0xa6; i++)
+		for (int i = 0xa0; i < 0xa6; i++)
 		{
 			_keyValue[i] = GetAsyncKeyState(i) ? TRUE : FALSE;
 
@@ -112,8 +112,19 @@ namespace PradleEngine
 				_keyValue[i] = FALSE;
 		}
 
-
 		FlushConsoleInputBuffer(_inputHandle);
+	}
+
+	void Input::DisbleQuickEditMode()
+	{
+		DWORD modeOld, modeNew;
+
+		GetConsoleMode(_inputHandle, &modeOld);
+
+		modeNew = modeOld;
+		modeNew &= ~ENABLE_QUICK_EDIT_MODE;
+
+		SetConsoleMode(_inputHandle, modeNew);
 	}
 
 	void Input::SetMouseCoordinate()

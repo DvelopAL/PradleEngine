@@ -28,16 +28,15 @@ namespace PradleEngine
 		Input();
 
 		static COORD GetMouseCoordinate() { return _mouseCoordinate; }
+		static bool Init();
+		static void Update();
 		static bool IsKey(KEY key);
 		static bool IsMouseDown(MOUSE key);
 		static bool IsKeyUp(KEY key);
 
 	private:
-		friend Engine;
-
-		static bool InitInput();
-		static void Update();
 		static void SetMouseCoordinate();
+		static void DisbleQuickEditMode();
 
 	private:
 		static HANDLE _inputHandle;

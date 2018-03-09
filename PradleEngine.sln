@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PradleEngine", "PradleEngine\PradleEngine.vcxproj", "{CEF50982-D7DC-40CA-8BE8-480B66BC64A8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj", "{C89C44BA-D3A7-4C66-9F6B-727EE1F09253}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,19 @@ Global
 		{CEF50982-D7DC-40CA-8BE8-480B66BC64A8}.Release|x64.Build.0 = Release|x64
 		{CEF50982-D7DC-40CA-8BE8-480B66BC64A8}.Release|x86.ActiveCfg = Release|Win32
 		{CEF50982-D7DC-40CA-8BE8-480B66BC64A8}.Release|x86.Build.0 = Release|Win32
+		{C89C44BA-D3A7-4C66-9F6B-727EE1F09253}.Debug|x64.ActiveCfg = Debug|x64
+		{C89C44BA-D3A7-4C66-9F6B-727EE1F09253}.Debug|x64.Build.0 = Debug|x64
+		{C89C44BA-D3A7-4C66-9F6B-727EE1F09253}.Debug|x86.ActiveCfg = Debug|Win32
+		{C89C44BA-D3A7-4C66-9F6B-727EE1F09253}.Debug|x86.Build.0 = Debug|Win32
+		{C89C44BA-D3A7-4C66-9F6B-727EE1F09253}.Release|x64.ActiveCfg = Release|x64
+		{C89C44BA-D3A7-4C66-9F6B-727EE1F09253}.Release|x64.Build.0 = Release|x64
+		{C89C44BA-D3A7-4C66-9F6B-727EE1F09253}.Release|x86.ActiveCfg = Release|Win32
+		{C89C44BA-D3A7-4C66-9F6B-727EE1F09253}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ADA51AA8-D73F-4C55-811D-E506F0742BF4}
 	EndGlobalSection
 EndGlobal

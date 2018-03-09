@@ -22,6 +22,6 @@ namespace PradleEngine
 		}
 
 	private:
-		WORD _bgColor;
+		WORD _bgColor = BLACK;
 	};
 }
